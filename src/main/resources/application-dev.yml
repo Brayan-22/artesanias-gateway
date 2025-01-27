@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: GATEWAY-SERVICE
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origin-patterns:
+              - "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+            maxAge: 3600
+      httpclient:
+        connect-timeout: 5000
+        response-timeout: 30s
+  config:
+    import: configserver:http://localhost:9196
+
+server:
+  port: ${GATEWAY_PORT:8080}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+logging:
+  level:
+    org.springframework.cloud.gateway.filter: TRACE
+    org.springframework.cloud.gateway.handler: TRACE
+    root: INFO
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty: DEBUG
