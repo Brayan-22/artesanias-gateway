@@ -1,17 +1,16 @@
-FROM maven:3-amazoncorretto-21-alpine AS build
+FROM maven:3-openjdk-17-slim AS build
 
 WORKDIR /app
 
 COPY pom.xml ./
 COPY src ./src
 
-RUN mvn clean package -DskipTests -Pprod
+RUN mvn clean package -Pprod -DskipTests
 
-FROM amazoncorretto:21-alpine3.18
+FROM openjdk:17-slim AS runtime
 
 WORKDIR /app
 
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/target/*.jar ./app.jar
 
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.jar"]
