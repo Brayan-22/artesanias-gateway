@@ -23,6 +23,7 @@ services:
         - "traefik.http.services.gateway-service.loadbalancer.server.port=8081"
         - "traefik.http.routers.gateway-service.entrypoints=websecure"
         - "traefik.http.routers.gateway-service.tls=true"
+        - "traefik.http.routers.gateway-service.service=gateway-service"
         - "traefik.http.routers.gateway-service.tls.certresolver=cloudflare"
         - "traefik.http.routers.gateway-service.tls.domains[0].main=${DOMAIN}"
         - "traefik.http.routers.gateway-service.tls.domains[0].sans=*.${DOMAIN}"
