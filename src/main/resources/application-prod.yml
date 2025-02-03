@@ -28,10 +28,14 @@ spring:
           uri: lb://COMMERCE-SERVICE
           predicates:
             - Path=/commerce/**, /commerce/v3/api-docs
+        - id : INVENTORY-SERVICE
+          uri: lb://INVENTORY-SERVICE
+          predicates:
+            - Path=/inventory/**, /inventory/v3/api-docs
   config:
     import: configserver:${CONFIGSERVER_URI:http://localhost:9196}
 server:
-  port: ${GATEWAY_PORT:8080}
+  port: ${GATEWAY_PORT:8081}
 management:
   endpoints:
     web:
@@ -59,6 +63,8 @@ springdoc:
         name: API Gateway Service
       - url: /commerce/v3/api-docs
         name: Ventas Service
+      - url: /inventory/v3/api-docs
+        name: Inventario Service
     urls-primary-name: API Gateway Service
 eureka:
   client:

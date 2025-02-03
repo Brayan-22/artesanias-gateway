@@ -20,6 +20,8 @@ public class GatewayConfig {
         return builder.routes()
                 .route(r -> r.path("/commerce/v3/api-docs")
                         .and().method(HttpMethod.GET).uri("lb://COMMERCE-SERVICE"))
+                .route(r -> r.path("inventory/v3/api-docs")
+                        .and().method(HttpMethod.GET).uri("lb://INVENTORY-SERVICE"))
                 .build();
     }
 }
