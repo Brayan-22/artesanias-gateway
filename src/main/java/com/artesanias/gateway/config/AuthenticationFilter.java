@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-@Component
-@RefreshScope
+//@Component
+//@RefreshScope
 public class AuthenticationFilter implements GatewayFilter {
     private final JwtUtils jwtUtils;
     private final RouterValidator validator;
@@ -27,7 +27,7 @@ public class AuthenticationFilter implements GatewayFilter {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         if (validator.isSecured.test(request)){
-            if (authMissing(request)){
+            if (!authMissing(request)){
                 return onError(exchange,HttpStatus.UNAUTHORIZED);
             }
             final String token = request.getHeaders().getOrEmpty("Authorization").get(0);

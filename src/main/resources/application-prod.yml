@@ -23,8 +23,13 @@ spring:
       discovery:
         locator:
           enabled: true
+      routes:
+        - id: COMMERCE-SERVICE
+          uri: lb://COMMERCE-SERVICE
+          predicates:
+            - Path=/commerce/**, /commerce/v3/api-docs
   config:
-    import: configserver:${spring.cloud.config.uri}
+    import: configserver:${CONFIGSERVER_URI:http://localhost:9196}
 server:
   port: ${GATEWAY_PORT:8080}
 management:
@@ -39,6 +44,27 @@ logging:
     root: INFO
     org.springframework.cloud.gateway: DEBUG
     reactor.netty: DEBUG
-
 jwt:
-  secret: ${JWT_SECRET:MiAVzqUXy5Tfr1kVIGpPMiAVzqUXy5Tfr1kVIGpP}
+  secret: MiAVzqUXy5Tfr1kVIGpPMiAVzqUXy5Tfr1kVIGpP
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+      - url: /commerce/v3/api-docs
+        name: Ventas Service
+    urls-primary-name: API Gateway Service
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
+  instance:
+    hostname: ${HOSTNAME:localhost}

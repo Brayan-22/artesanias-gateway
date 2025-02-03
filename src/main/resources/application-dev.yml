@@ -23,13 +23,13 @@ spring:
       discovery:
         locator:
           enabled: true
-#    circuitbreaker:
-#      resilience4j:
-#        reactive:
-#          enabled: true
+      routes:
+        - id: COMMERCE-SERVICE
+          uri: lb://commerce-service
+          predicates:
+            - Path=/commerce/**, /commerce/v3/api-docs
   config:
     import: configserver:http://localhost:9196
-
 server:
   port: ${GATEWAY_PORT:8080}
 management:
@@ -46,3 +46,25 @@ logging:
     reactor.netty: DEBUG
 jwt:
   secret: MiAVzqUXy5Tfr1kVIGpPMiAVzqUXy5Tfr1kVIGpP
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+      - url: /commerce/v3/api-docs
+        name: Ventas Service
+    urls-primary-name: API Gateway Service
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost

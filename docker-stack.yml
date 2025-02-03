@@ -1,0 +1,29 @@
+services:
+  commerce-service:
+    image: brayan22/artesanias-gateway-service:latest
+    environment:
+      - CONFIGSERVER_URI=http://artesanias-config-server:9196
+      - GATEWAY_PORT=8081
+      - EUREKA_URI=http://artesanias-discovery-server:8761/eureka/
+      - HOSTNAME=gateway-service
+    hostname: artesanias-gateway-service
+    ports:
+      - "8081:8081"
+    networks:
+      - backend
+      - reverse-proxy
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=reverse-proxy"
+        - "traefik.http.routers.gateway-service.rule=Host(`artesanias.localhost`)"
+        - "traefik.http.services.gateway-service.loadbalancer.server.port=8081"
+        - "traefik.http.routers.gateway-service.entrypoints=web"
+networks:
+  backend:
+    external: true
+  reverse-proxy:
+    external: true
