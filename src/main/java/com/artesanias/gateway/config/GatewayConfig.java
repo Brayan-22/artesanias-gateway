@@ -8,6 +8,7 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
@@ -26,7 +27,7 @@ public class GatewayConfig {
         this.authenticationFilter = authenticationFilter;
     }
     @Bean
-    public RouteLocator routes(RouteLocatorBuilder builder, RouteLocator routes){
+    public RouteLocator routes(RouteLocatorBuilder builder, @Lazy RouteLocator routes){
         return builder.routes()
                 .route("auth-service", r -> r.path("/auth/**")
                         .filters(f -> f.filter(authenticationFilter))
