@@ -34,7 +34,6 @@ spring:
             - Path=/inventory/**, /inventory/v3/api-docs
         - id: USER-SERVICE
           uri: lb://user-service
-
           predicates:
             - Path=/user/**, /user/v3/api-docs
         - id: AUTH-SERVICE

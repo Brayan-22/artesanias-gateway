@@ -6,6 +6,7 @@ services:
       - GATEWAY_PORT=8081
       - EUREKA_URI=http://artesanias-discovery-server:8761/eureka/
       - HOSTNAME=gateway-service
+      - JWT_SECRET=${JWT_SECRET}
     hostname: artesanias-gateway-service
     ports:
       - "8081:8081"

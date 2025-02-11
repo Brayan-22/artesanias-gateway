@@ -25,15 +25,23 @@ spring:
           enabled: true
       routes:
         - id: COMMERCE-SERVICE
-          uri: lb://COMMERCE-SERVICE
+          uri: lb://commerce-service
           predicates:
             - Path=/commerce/**, /commerce/v3/api-docs
-        - id : INVENTORY-SERVICE
-          uri: lb://INVENTORY-SERVICE
+        - id: INVENTORY-SERVICE
+          uri: lb://inventory-service
           predicates:
             - Path=/inventory/**, /inventory/v3/api-docs
+        - id: USER-SERVICE
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**, /user/v3/api-docs
+        - id: AUTH-SERVICE
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**, /auth/v3/api-docs
   config:
-    import: configserver:${CONFIGSERVER_URI:http://localhost:9196}
+    import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:9196}
 server:
   port: ${GATEWAY_PORT:8081}
 management:
@@ -49,7 +57,7 @@ logging:
     org.springframework.cloud.gateway: DEBUG
     reactor.netty: DEBUG
 jwt:
-  secret: MiAVzqUXy5Tfr1kVIGpPMiAVzqUXy5Tfr1kVIGpP
+  secret: ${JWT_SECRET:MiAVzqUXy5Tfr1kVIGpPMiAVzqUXy5Tfr1kVIGpP}
 springdoc:
   enable-native-support: true
   api-docs:
@@ -65,6 +73,10 @@ springdoc:
         name: Ventas Service
       - url: /inventory/v3/api-docs
         name: Inventario Service
+      - url: /user/v3/api-docs
+        name: Usuario Service
+      - url: /auth/v3/api-docs
+        name: Autenticación Service
     urls-primary-name: API Gateway Service
 eureka:
   client:
