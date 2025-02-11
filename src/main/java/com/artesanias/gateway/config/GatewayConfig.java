@@ -21,14 +21,12 @@ public class GatewayConfig {
         this.authenticationFilter = authenticationFilter;
     }
     @Bean
-    public RouteLocator routes(RouteLocatorBuilder builder){
+    public RouteLocator routes(RouteLocatorBuilder builder, RouteLocator routes){
         return builder.routes()
                 .route(r -> r.path("/commerce/v3/api-docs")
                         .and().method(HttpMethod.GET).uri("lb://COMMERCE-SERVICE"))
                 .route(r -> r.path("inventory/v3/api-docs")
                         .and().method(HttpMethod.GET).uri("lb://INVENTORY-SERVICE"))
-                .route(r -> r.path("user/v3/api-docs")
-                        .and().method(HttpMethod.GET).uri("lb://USER-SERVICE"))
                 .build();
     }
 }

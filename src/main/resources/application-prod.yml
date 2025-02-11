@@ -35,11 +35,11 @@ spring:
         - id: USER-SERVICE
           uri: lb://user-service
           predicates:
-            - Path=/user/**, /user/v3/api-docs
+            - Path=/user/**
         - id: AUTH-SERVICE
           uri: lb://auth-service
           predicates:
-            - Path=/auth/**, /auth/v3/api-docs
+            - Path=/auth/**
   config:
     import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:9196}
 server:
@@ -73,10 +73,6 @@ springdoc:
         name: Ventas Service
       - url: /inventory/v3/api-docs
         name: Inventario Service
-      - url: /user/v3/api-docs
-        name: Usuario Service
-      - url: /auth/v3/api-docs
-        name: Autenticación Service
     urls-primary-name: API Gateway Service
 eureka:
   client:
