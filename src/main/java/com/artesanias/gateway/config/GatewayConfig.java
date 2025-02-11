@@ -26,29 +26,29 @@ public class GatewayConfig {
     public GatewayConfig(AuthenticationFilter authenticationFilter) {
         this.authenticationFilter = authenticationFilter;
     }
-    @Bean
-    public RouteLocator routes(RouteLocatorBuilder builder, @Lazy RouteLocator routes){
-        return builder.routes()
-                .route("auth-service", r -> r.path("/auth/**")
-                        .filters(f -> f.filter(authenticationFilter))
-                        .uri("lb://auth-service"))
-                .route("user-service", r -> r.path("/user/**")
-                        .filters(f -> f.filter(authenticationFilter))
-                        .uri("lb://user-service"))
-                .build();
-
-    }
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        configuration.setAllowedHeaders(Collections.singletonList("*"));
-        configuration.setAllowCredentials(true);
-        configuration.setMaxAge(3600L);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+//    @Bean
+//    public RouteLocator routes(RouteLocatorBuilder builder, @Lazy RouteLocator routes){
+//        return builder.routes()
+//                .route("auth-service", r -> r.path("/auth/**")
+//                        .filters(f -> f.filter(authenticationFilter))
+//                        .uri("lb://auth-service"))
+//                .route("user-service", r -> r.path("/user/**")
+//                        .filters(f -> f.filter(authenticationFilter))
+//                        .uri("lb://user-service"))
+//                .build();
+//
+//    }
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(Collections.singletonList("*"));
+//        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+//        configuration.setAllowedHeaders(Collections.singletonList("*"));
+//        configuration.setAllowCredentials(true);
+//        configuration.setMaxAge(3600L);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 }
