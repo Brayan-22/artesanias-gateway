@@ -23,23 +23,7 @@ spring:
       discovery:
         locator:
           enabled: true
-#      routes:
-##        - id: COMMERCE-SERVICE
-##          uri: lb://commerce-service
-##          predicates:
-##            - Path=/commerce/**, /commerce/v3/api-docs
-##        - id: INVENTORY-SERVICE
-##          uri: lb://inventory-service
-##          predicates:
-##            - Path=/inventory/**, /inventory/v3/api-docs
-#        - id: USER-SERVICE
-#          uri: lb://user-service
-#          predicates:
-#            - Path=/user/**
-#        - id: AUTH-SERVICE
-#          uri: lb://auth-service
-#          predicates:
-#            - Path=/auth/**
+
   config:
     import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:9196}
 server:
@@ -58,22 +42,7 @@ logging:
     reactor.netty: DEBUG
 jwt:
   secret: ${JWT_SECRET:MiAVzqUXy5Tfr1kVIGpPMiAVzqUXy5Tfr1kVIGpP}
-springdoc:
-  enable-native-support: true
-  api-docs:
-    enabled: true
-  swagger-ui:
-    enabled: true
-    path: /swagger-ui.html
-    config-url: /v3/api-docs/swagger-config
-    urls:
-      - url: /v3/api-docs
-        name: API Gateway Service
-#      - url: /commerce/v3/api-docs
-#        name: Ventas Service
-#      - url: /inventory/v3/api-docs
-#        name: Inventario Service
-#    urls-primary-name: API Gateway Service
+
 eureka:
   client:
     fetch-registry: true
