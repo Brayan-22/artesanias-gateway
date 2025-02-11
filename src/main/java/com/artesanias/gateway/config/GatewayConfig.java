@@ -15,6 +15,11 @@ import org.springframework.http.HttpMethod;
 public class GatewayConfig {
 
 
+    private final AuthenticationFilter authenticationFilter;
+
+    public GatewayConfig(AuthenticationFilter authenticationFilter) {
+        this.authenticationFilter = authenticationFilter;
+    }
     @Bean
     public RouteLocator routes(RouteLocatorBuilder builder){
         return builder.routes()
@@ -22,6 +27,8 @@ public class GatewayConfig {
                         .and().method(HttpMethod.GET).uri("lb://COMMERCE-SERVICE"))
                 .route(r -> r.path("inventory/v3/api-docs")
                         .and().method(HttpMethod.GET).uri("lb://INVENTORY-SERVICE"))
+                .route(r -> r.path("user/v3/api-docs")
+                        .and().method(HttpMethod.GET).uri("lb://USER-SERVICE"))
                 .build();
     }
 }
