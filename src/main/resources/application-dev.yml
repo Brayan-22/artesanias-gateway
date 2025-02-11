@@ -27,19 +27,23 @@ spring:
         - id: COMMERCE-SERVICE
           uri: lb://commerce-service
           predicates:
-            - Path=/commerce/**, /commerce/v3/api-docs
-        - id: INVENTORY-SERVICE
-          uri: lb://inventory-service
+            - Path=/commerce/**
+        - id: MANAGEMENT-SERVICE
+          uri: lb://management-service
           predicates:
-            - Path=/inventory/**, /inventory/v3/api-docs
+            - Path=/management/**
         - id: USER-SERVICE
           uri: lb://user-service
           predicates:
-            - Path=/user/**, /user/v3/api-docs
+            - Path=/user/**
         - id: AUTH-SERVICE
           uri: lb://auth-service
           predicates:
-            - Path=/auth/**, /auth/v3/api-docs
+            - Path=/auth/**
+        - id: PAYMENT-SERVICE
+          uri: lb://payment-service
+          predicates:
+            - Path=/payment/**
   config:
     import: optional:configserver:http://localhost:9196
 server:
