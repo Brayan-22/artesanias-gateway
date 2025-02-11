@@ -23,10 +23,13 @@ public class GatewayConfig {
     @Bean
     public RouteLocator routes(RouteLocatorBuilder builder, RouteLocator routes){
         return builder.routes()
-                .route(r -> r.path("/commerce/v3/api-docs")
-                        .and().method(HttpMethod.GET).uri("lb://COMMERCE-SERVICE"))
-                .route(r -> r.path("inventory/v3/api-docs")
-                        .and().method(HttpMethod.GET).uri("lb://INVENTORY-SERVICE"))
+                .route("auth-service", r -> r.path("/auth/**")
+                        .filters(f -> f.filter(authenticationFilter))
+                        .uri("lb://auth-service"))
+                .route("user-service", r -> r.path("/user/**")
+                        .filters(f -> f.filter(authenticationFilter))
+                        .uri("lb://user-service"))
                 .build();
+
     }
 }
