@@ -1,5 +1,0 @@
-language: "java"
-name: "gateway-service"
-appmap_dir: "tmp/appmap"
-packages:
-- path: "com.artesanias.gateway"
