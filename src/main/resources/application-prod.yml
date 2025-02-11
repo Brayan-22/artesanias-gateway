@@ -42,6 +42,8 @@ spring:
             - Path=/auth/**, /auth/v3/api-docs
   config:
     import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:9196}
+  main:
+    allow-circular-references: true
 server:
   port: ${GATEWAY_PORT:8081}
 management:
