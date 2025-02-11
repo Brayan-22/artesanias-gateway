@@ -24,18 +24,22 @@ spring:
         locator:
           enabled: true
       routes:
+        - id: COMMERCE-SERVICE
+          uri: lb://commerce-service
+          predicates:
+            - Path=/commerce/**, /commerce/v3/api-docs
+        - id: INVENTORY-SERVICE
+          uri: lb://inventory-service
+          predicates:
+            - Path=/inventory/**, /inventory/v3/api-docs
         - id: USER-SERVICE
           uri: lb://user-service
           predicates:
-            - Path=/user/**
-          filters:
-            - AuthenticationFilter
+            - Path=/user/**, /user/v3/api-docs
         - id: AUTH-SERVICE
           uri: lb://auth-service
           predicates:
-            - Path=/auth/**
-          filters:
-            - AuthenticationFilter
+            - Path=/auth/**, /auth/v3/api-docs
   config:
     import: optional:configserver:http://localhost:9196
 server:
@@ -65,8 +69,8 @@ springdoc:
     urls:
       - url: /v3/api-docs
         name: API Gateway Service
-#      - url: /commerce/v3/api-docs
-#        name: Ventas Service
+      - url: /commerce/v3/api-docs
+        name: Ventas Service
     urls-primary-name: API Gateway Service
 eureka:
   client:

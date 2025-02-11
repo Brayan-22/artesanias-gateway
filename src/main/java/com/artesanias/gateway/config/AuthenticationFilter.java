@@ -12,7 +12,6 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 @Component
-@RefreshScope
 public class AuthenticationFilter implements GatewayFilter {
     private final JwtUtils jwtUtils;
     private final RouterValidator validator;
