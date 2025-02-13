@@ -1,9 +1,11 @@
 package com.artesanias.gateway.config;
 
 import com.artesanias.gateway.service.JwtUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -14,13 +16,13 @@ import reactor.core.publisher.Mono;
 @Component
 @RefreshScope
 public class AuthenticationFilter implements GatewayFilter {
-    private final JwtUtils jwtUtils;
-    private final RouterValidator validator;
 
-    public AuthenticationFilter(JwtUtils jwtUtils, RouterValidator validator) {
-        this.jwtUtils = jwtUtils;
-        this.validator = validator;
-    }
+    @Autowired
+    private JwtUtils jwtUtils;
+
+    @Autowired
+    private RouterValidator validator;
+
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {

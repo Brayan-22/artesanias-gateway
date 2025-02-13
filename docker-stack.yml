@@ -1,5 +1,5 @@
 services:
-  commerce-service:
+  gateway-service:
     image: brayan22/artesanias-gateway-service:latest
     environment:
       - CONFIGSERVER_URI=http://artesanias-config-server:9196
