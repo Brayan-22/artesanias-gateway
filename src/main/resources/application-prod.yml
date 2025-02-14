@@ -47,6 +47,8 @@ spring:
             - Path=/payment/**
   config:
     import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:9196}
+  cache:
+    type: caffeine
 server:
   port: ${GATEWAY_PORT:8099}
 management:
