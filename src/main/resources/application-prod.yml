@@ -56,11 +56,9 @@ management:
         include: health
 logging:
   level:
-    org.springframework.cloud.gateway.filter: TRACE
-    org.springframework.cloud.gateway.handler: TRACE
-    root: INFO
-    org.springframework.cloud.gateway: DEBUG
-    reactor.netty: DEBUG
+    org.springframework.cloud.gateway: INFO
+    com.netflix.eureka: INFO
+    root: WARN
 jwt:
   secret: MiAVzqUXy5Tfr1kVIGpPMiAVzqUXy5Tfr1kVIGpP
 springdoc:
