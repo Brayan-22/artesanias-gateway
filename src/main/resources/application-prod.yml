@@ -56,6 +56,8 @@ management:
         include: health
 logging:
   level:
+    org.springframework.cloud.gateway.filter: INFO
+    org.springframework.cloud.gateway.handler: INFO
     org.springframework.cloud.gateway: INFO
     com.netflix.eureka: INFO
     root: WARN
