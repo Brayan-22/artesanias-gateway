@@ -2,7 +2,7 @@ services:
   gateway-service:
     image: brayan22/artesanias-gateway-service:latest
     environment:
-      - CONFIGSERVER_URI=http://artesanias-config-server:9196
+      - CONFIG_SERVER_URI=http://artesanias-config-server:9196
       - GATEWAY_PORT=8081
       - EUREKA_URI=http://artesanias-discovery-server:8761/eureka/
       - HOSTNAME=gateway-service
