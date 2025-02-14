@@ -9,11 +9,18 @@ spring:
             allowed-origin-patterns:
               - "https://artesaniasdonhelio.brayandev.info"
               - "http://artesanias-frontend"
+              - "https://artesanias-bogota-front.vercel.app"
             allowedMethods:
               - GET
               - POST
               - PUT
               - DELETE
+              - OPTIONS
+              - PATCH
+              - HEAD
+              - TRACE
+              - CONNECT
+              - ALL
             allowedHeaders:
               - "*"
             allowCredentials: true
